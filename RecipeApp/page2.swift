@@ -48,13 +48,14 @@ struct page2: View {
     @State private var selectedMeasurement: String = ""
     @State private var quantity: Int = 1
     @State private var ingredients: [(name: String, measurement: String, quantity: Int)] = []
+    @State private var titleText = ""
+    @State private var descriptionText = ""
 
     var body: some View {
         NavigationView {
             ZStack {
                 ScrollView {
                     VStack {
-
                         // Rectangle for photo upload
                         ZStack {
                             if let image = recipeImage {
@@ -67,7 +68,7 @@ struct page2: View {
                                 Rectangle()
                                     .stroke(style: StrokeStyle(lineWidth: 2, dash: [5, 3]))
                                     .foregroundColor(Color(hex: "#FB6112"))
-                                    .frame(width: 413, height: 181) // Reduced height
+                                    .frame(width: 413, height: 181)
                                     .foregroundColor(Color(hue: 1.0, saturation: 0.04, brightness: 0.234))
                                     .background(Color(hex: "#E4E4E5"))
                                 VStack {
@@ -90,7 +91,7 @@ struct page2: View {
                             .font(.title3)
                             .fontWeight(.bold)
                             .padding(.trailing, 310.0)
-                        TextField("Title", text: .constant(""))
+                        TextField("Title", text: $titleText)
                             .padding(.all, 9)
                             .frame(height: 45.0)
                             .background(Color(hex: "#E4E4E5"))
@@ -100,7 +101,7 @@ struct page2: View {
                             .font(.title3)
                             .fontWeight(.bold)
                             .padding(.trailing, 250.0)
-                        TextField("Description", text: .constant(""))
+                        TextField("Description", text: $descriptionText)
                             .padding(.all, 10)
                             .frame(height: 100)
                             .background(Color(hex: "#E4E4E5"))
@@ -240,7 +241,7 @@ struct page2: View {
                             .cornerRadius(8)
                         }
                     }
-                    .frame(width: 306, height: 400) // Increased height for stepper
+                    .frame(width: 306, height: 400)
                     .background(Color(hex: "#E4E4E5"))
                     .cornerRadius(8)
                     .shadow(radius: 10)
@@ -249,6 +250,16 @@ struct page2: View {
                 }
             }
             .navigationTitle("New Recipe") // Set the title of the navigation bar
+            
+            .navigationBarItems(trailing: Button(action: {
+                // Save action
+               
+            }) {
+                Text("Save")
+                    .padding(.bottom, 128) // Adjust vertical paddin
+                    .foregroundColor(Color(hex: "#FB6112"))
+                   
+            })
         }
     }
 }
